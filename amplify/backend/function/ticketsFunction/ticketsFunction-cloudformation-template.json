@@ -76,7 +76,7 @@
 				"Timeout": "25",
 				"Code": {
 					"S3Bucket": "amplify-supportticket-dev-30018-deployment",
-					"S3Key": "amplify-builds/ticketsFunction-635848764f56632b4f77-build.zip"
+					"S3Key": "amplify-builds/ticketsFunction-68734d70615155524d4e-build.zip"
 				}
 			}
 		},
@@ -86,12 +86,12 @@
 				"RoleName": {
 					"Fn::If": [
 						"ShouldNotCreateEnvResources",
-						"supportticketLambdaRole7e6bf65e",
+						"supportticketLambdaRolec4def193",
 						{
 							"Fn::Join": [
 								"",
 								[
-									"supportticketLambdaRole7e6bf65e",
+									"supportticketLambdaRolec4def193",
 									"-",
 									{
 										"Ref": "env"

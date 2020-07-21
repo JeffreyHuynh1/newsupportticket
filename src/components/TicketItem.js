@@ -24,7 +24,7 @@ const icons = (department) => {
 };
 
 //takes in ticket item as parameter
-export const TicketItem = ({ item, deleteTicket }) => {
+export const TicketItem = ({ item, deleteTicket, userName }) => {
   //states to handle modal open and close
   const [show, setShow] = useState(false);
 
@@ -50,7 +50,8 @@ export const TicketItem = ({ item, deleteTicket }) => {
             <strong>{item.ticketTitle}</strong>{" "}
             <span style={{ float: "right" }}> Status: {item.status}</span>
             <p className="info">
-              Opened On: {`${month}-${day}-${year} ${hours}:${minutes}`}{" "}
+              Opened By {userName} On{" "}
+              {`${month}-${day}-${year} ${hours}:${minutes}`}{" "}
             </p>
           </div>
         </div>
@@ -77,7 +78,7 @@ export const TicketItem = ({ item, deleteTicket }) => {
           <Button
             variant="danger"
             onClick={(e) => {
-              deleteTicket(item.ticketID);
+              deleteTicket(item.ticketID, item.status);
               handleClose();
             }}
           >

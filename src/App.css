@@ -10,6 +10,16 @@ body {
   width: 10%;
 }
 
+.newticket__button {
+  margin-bottom: 10px;
+}
+
+.modal__style {
+  background: #007bff;
+}
+.modal__text {
+  color: white;
+}
 /* GRID */
 .col {
   padding: 10px 20px;

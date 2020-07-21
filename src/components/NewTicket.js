@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import { Modal, Button, Form } from "react-bootstrap";
 import { v4 as uuidv4 } from "uuid";
 import "../App.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPencilAlt } from "@fortawesome/free-solid-svg-icons";
+import { faTimes } from "@fortawesome/free-solid-svg-icons";
 
 export const NewTicket = ({ handleSubmit }) => {
   //states for values needed for post method
@@ -17,7 +20,11 @@ export const NewTicket = ({ handleSubmit }) => {
 
   return (
     <div>
-      <Button variant="success" onClick={handleShow} className="pull-right">
+      <Button
+        variant="success"
+        onClick={handleShow}
+        className="float-right newticket__button"
+      >
         New Ticket
       </Button>
 
@@ -30,9 +37,13 @@ export const NewTicket = ({ handleSubmit }) => {
         aria-labelledby="New Ticket"
       >
         <Modal.Dialog>
-          <Modal.Header closeButton style={{ backgroud: "blue" }}>
-            <Modal.Title>Create New Ticket</Modal.Title>
-          </Modal.Header>
+          <div className="modal__style">
+            <Modal.Header closeButton>
+              <Modal.Title className="modal__text">
+                <FontAwesomeIcon icon={faPencilAlt} /> Create New Ticket
+              </Modal.Title>
+            </Modal.Header>
+          </div>
 
           <Modal.Body>
             <Form>
@@ -47,7 +58,7 @@ export const NewTicket = ({ handleSubmit }) => {
               <Form.Group>
                 <Form.Control
                   type="text"
-                  placeholder="Department: Marketing, Finance, Operations, Human Resources, IT"
+                  placeholder="Department"
                   onChange={(e) => setDepartment(e.target.value)}
                 ></Form.Control>
               </Form.Group>
@@ -56,7 +67,7 @@ export const NewTicket = ({ handleSubmit }) => {
                 <Form.Control
                   as="textarea"
                   rows="4"
-                  placeholder="Ticket Description"
+                  placeholder="Please detail your issue or question"
                   onChange={(e) => setTicketDescription(e.target.value)}
                 ></Form.Control>
               </Form.Group>
@@ -65,7 +76,7 @@ export const NewTicket = ({ handleSubmit }) => {
 
           <Modal.Footer>
             <Button variant="secondary" onClick={handleClose}>
-              Discard
+              <FontAwesomeIcon icon={faTimes} /> Discard
             </Button>
             <Button
               variant="primary"
@@ -83,7 +94,7 @@ export const NewTicket = ({ handleSubmit }) => {
                 handleClose();
               }}
             >
-              Create
+              <FontAwesomeIcon icon={faPencilAlt} /> Create
             </Button>
           </Modal.Footer>
         </Modal.Dialog>

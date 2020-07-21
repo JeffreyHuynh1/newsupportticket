@@ -23,8 +23,8 @@ if (process.env.ENV && process.env.ENV !== "NONE") {
 const userIdPresent = true; // TODO: update in case is required to use that definition
 const partitionKeyName = "ticketID";
 const partitionKeyType = "S";
-const sortKeyName = "status";
-const sortKeyType = "S";
+const sortKeyName = "";
+const sortKeyType = "";
 const hasSortKey = sortKeyName !== "";
 const path = "/tickets";
 const UNAUTH = "UNAUTH";
@@ -199,11 +199,15 @@ app.post(path, function (req, res) {
  * HTTP remove method to delete object *
  ***************************************/
 
-app.delete(path + "/object" + hashKeyPath + sortKeyPath, function (req, res) {
+app.delete(path + hashKeyPath + sortKeyPath, function (req, res) {
   var params = {};
   if (userIdPresent && req.apiGateway) {
-    params[partitionKeyName] =
-      req.apiGateway.event.requestContext.identity.cognitoIdentityId || UNAUTH;
+    //params[partitionKeyName] =
+    // req.apiGateway.event.requestContext.identity.cognitoIdentityId || UNAUTH;
+    params[partitionKeyName] = convertUrlType(
+      req.params[partitionKeyName],
+      partitionKeyType
+    );
   } else {
     params[partitionKeyName] = req.params[partitionKeyName];
     try {
@@ -232,6 +236,7 @@ app.delete(path + "/object" + hashKeyPath + sortKeyPath, function (req, res) {
     TableName: tableName,
     Key: params,
   };
+
   dynamodb.delete(removeItemParams, (err, data) => {
     if (err) {
       res.statusCode = 500;
